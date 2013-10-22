@@ -71,20 +71,20 @@ void Move(POINT *P, int DeltaX, int DeltaY) {
 	Ordinat(*P) = Ordinat(*P) + DeltaY;
 }
 
-void GetMinPOINT(POINT *P1,POINT  P2) {
-	if (Absis(*P1) < Absis(P2)) {
+void GetMinPOINT(POINT *P1, POINT P2) {
+	if (Absis(*P1) > Absis(P2)) {
 		Absis(*P1) = Absis(P2);
 	}
-	if (Ordinat(*P1) < Ordinat(P2)) {
+	if (Ordinat(*P1) > Ordinat(P2)) {
 		Ordinat(*P1) = Ordinat(P2);
 	}
 }
 
 void GetMaxPOINT(POINT *P1, POINT P2) {
-	if (Absis(*P1) > Absis(P2)) {
+	if (Absis(*P1) < Absis(P2)) {
 		Absis(*P1) = Absis(P2);
 	}
-	if (Ordinat(*P1) > Ordinat(P2)) {
+	if (Ordinat(*P1) < Ordinat(P2)) {
 		Ordinat(*P1) = Ordinat(P2);
 	}
 }

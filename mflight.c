@@ -13,12 +13,27 @@ int main() {
 	boolean toleran = false, status = false;
 	char *result = "Tidak-OK";
 
-	scanf("%d\n", &nTP);
+	//sample
+	POINT rute[] = { MakePOINT(5, 5), MakePOINT(6, 6), MakePOINT(8, 7),
+			MakePOINT(9, 9) };
+	POINT rute2[] = { MakePOINT(5, 5), MakePOINT(8, 7), MakePOINT(9, 9) };
+
+	//jika ingin menggunakan scanf, buka komen scanf dan hilangkan 1 code dibawahnya
+//	scanf("%d", &nTP);
+	nTP = sizeof(rute) / sizeof(rute[0]);
+
 	CreateArr(&TP, nTP);
 	max = MakePOINT(-1, -1);
 	min = MakePOINT(sizeof(int), sizeof(int));
 	for (i = 0; i < nTP; i++) {
-		scanf("%d %d %d\n", &no, &X, &Y);
+
+//		scanf("%d %d %d\n", &no, &X, &Y);
+//		jika ingin menggunakan scanf uncomment 1 line diatas komen ini
+//		dan hapus 3 line dibawah komen ini
+		no = i;
+		X = rute[i].X;
+		Y = rute[i].Y;
+
 		if ((max.X == -1) && (min.X == sizeof(int))) {
 			max.X = X;
 			max.Y = Y;
@@ -31,27 +46,36 @@ int main() {
 		SetPOINT(&TP, MakePOINT(X, Y), no);
 	}
 
+//jika ingin menggunakan scanf, buka komen scanf dan hilangkan 1 code dibawahnya
+//	scanf("%d", &nRI);
+	nRI = sizeof(rute2) / sizeof(rute2[0]);
 
-	scanf("%d\n", &nRI);
 	CreateArr(&RI, nRI);
 	for (i = 0; i < nRI; i++) {
-		scanf("%d %d %d\n", &no, &X, &Y);
+
+//		scanf("%d %d %d\n", &no, &X, &Y);
+//		jika ingin menggunakan scanf uncomment 1 line diatas komen ini
+//		dan hapus 3 line dibawah komen ini
+		no = i;
+		X = rute2[i].X;
+		Y = rute2[i].Y;
+
 		SetPOINT(&RI, MakePOINT(X, Y), no);
 	}
 
 	if (!IsEmpty(TP) && !IsEmpty(RI)) {
-		printf("not empty\n");
+
 		if (GetNB(TP) != GetNB(RI)) {
-			printf("jumlah tidak sama\n");
+
 			if ((ExactEQ(TP.T[0], RI.T[0]) == 1)
-					&& (ExactEQ(TP.T[GetNB(TP) - 1], RI.T[GetNB(TP) - 1]) == 1)) {
-				printf("TP & RI sama\n");
-				for (i = 1; i < GetNB(RI) - 2; i++) {
+					&& (ExactEQ(TP.T[GetNB(TP) - 1], RI.T[GetNB(RI) - 1]) == 1)) {
+
+				for (i = 0; i < GetNB(RI); i++) {
 					status = true;
 					if ((RI.T[i].X > max.X) || (RI.T[i].Y > max.Y)
 							|| (RI.T[i].X < min.X) || (RI.T[i].Y < min.Y)) {
 						status = false;
-						printf("break\n");
+
 						break;
 					}
 
@@ -63,30 +87,26 @@ int main() {
 				}
 			}
 		} else {
-			printf("else\n");
-			if (ExactEQ(TP.T[0], RI.T[0])
-					&& ExactEQ(TP.T[GetNB(TP) - 1], RI.T[GetNB(TP) - 1])) {
-				printf("ujungnya sama\n");
-				for (i = 0; i < GetNB(RI) - 1; i++) {
 
-					printf("cek setiap point\n");
+			if (ExactEQ(TP.T[0], RI.T[0])
+					&& ExactEQ(TP.T[GetNB(TP) - 1], RI.T[GetNB(RI) - 1])) {
+
+				for (i = 0; i < GetNB(RI); i++) {
+
 					if (ExactEQ(TP.T[i], RI.T[i]) == 1) {
 						countPass++;
-						printf("pas\n");
+
 					} else if (EQ(TP.T[i], RI.T[i], d) == 1) {
 						countPass++;
 						toleran = true;
-						printf("toleran\n");
+
 					} else if ((RI.T[i].X > max.X) || (RI.T[i].Y > max.Y)
 							|| (RI.T[i].X < min.X) || (RI.T[i].Y < min.Y)) {
 						pass++;
-						printf("passing\n");
 						if (pass == 2) {
-							printf("pass break <2\n");
 							break;
 						}
 					}
-
 				}
 				if (countPass == GetNB(RI)) {
 					result = "OK-9\n";
@@ -101,7 +121,7 @@ int main() {
 		}
 	}
 
-	printf("%s \n",result);
+	printf("%s \n", result);
 
 	return 0;
 }
