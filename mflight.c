@@ -35,8 +35,7 @@ int main() {
 		Y = rute[i].Y;
 
 		if ((max.X == -1) && (min.X == sizeof(int))) {
-			max.X = X;
-			max.Y = Y;
+			max = MakePOINT(X,Y);
 			CopyPOINT(&min, max);
 		} else {
 			GetMaxPOINT(&max, MakePOINT(X, Y));
